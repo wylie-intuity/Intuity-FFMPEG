@@ -1,0 +1,1 @@
+config:aarch64::generic:darwin:Apple clang version 15.0.0 (clang-1500.3.9.4):--prefix=/usr/local/ffmpeg-debug --arch=arm64 --enable-gpl --enable-libx264 --enable-debug=3 --disable-optimizations --disable-stripping --extra-cflags='-fno-omit-frame-pointer -O0 -g' --extra-ldflags=-g --enable-shared
