@@ -1,3 +1,5 @@
+This version of FFMPEG was modified by Intuity for better debugging.
+
 FFmpeg README
 =============
 
