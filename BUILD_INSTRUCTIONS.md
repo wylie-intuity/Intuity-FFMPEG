@@ -26,6 +26,18 @@ The configure script allows you to customize the build with various options, suc
   --prefix=/usr/local/ffmpeg: Specifies the installation directory for the compiled binaries and libraries.
   --enable-shared: Builds FFmpeg as shared libraries, which are often preferred for dynamic linking with other applications. You can omit this to build static libraries instead.
 
+./configure \
+  --prefix=/usr/local/ffmpeg-debug \
+  --arch=arm64 \
+  --enable-gpl \
+  --enable-libx264 \
+  --enable-debug=3 \
+  --disable-optimizations \
+  --disable-stripping \
+  --extra-cflags="-fno-omit-frame-pointer -O0 -g" \
+  --extra-ldflags="-g" \
+  --enable-shared
+
 
 Step 5: Compile FFmpeg:
 After successful configuration, compile the source code using make. The -j flag can be used to leverage multiple CPU cores for faster compilation.
