@@ -1,0 +1,84 @@
+The goal's to build ffmpeg and libx264 from source code.
+The ffmpeg version is 7.1.1, and is cloned from wylie's github here:
+  https://github.com/wylie-intuity/Intuity-FFMPEG.git
+The libx264 code is maintained online here:
+  https://code.videolan.org/videolan/x264.git
+
+The following steps were taken to reach said goal:
+
+# Ensure Apple command line tools (clang, make, ld, etc.)
+xcode-select --install  # ok if it says "already installed"
+
+# set up some env variables in your ~/.bash_profile file:
+export PREFIX_X264="$HOME/ffmpeg_sandbox/opt/x264"
+export PREFIX_FFMPEG="$HOME/ffmpeg_sandbox/opt/ffmpeg_7.1.1-wylie-intuity/Intuity-FFMPEG"
+
+***************
+build libx264
+***************
+
+cd ${PREFIX_X264}/..
+git clone --depth 1 https://code.videolan.org/videolan/x264.git
+cd ${PREFIX_X264}
+
+./configure --prefix="$PREFIX_X264" --enable-shared --enable-pic
+make -j"$(sysctl -n hw.ncpu)"
+make install
+
+# sanity checks:
+# Headers and library should now exist:
+ls "$PREFIX_X264/include/x264.h"
+ls "$PREFIX_X264/lib/libx264."*            # expect .dylib and maybe .a
+
+
+***************
+build ffmpeg
+***************
+
+cd ${PREFIX_FFMPEG}/..
+git clone https://github.com/wylie-intuity/Intuity-FFMPEG.git
+cd ${PREFIX_FFMPEG}
+
+# Help the runtime loader find libx264.dylib without extra env vars:
+export LDFLAGS="-Wl,-rpath,$PREFIX_X264/lib"
+
+# note: if you want to use the vmaf filter, you'll want to run this command in MacOS before configuring ffmpeg below:
+  brew install libvmaf
+  brew reinstall libvmaf    # optional
+
+# here's the configure command for including the x264 snapshot in the build of ffmpeg
+./configure \
+  --prefix="$PREFIX_FFMPEG" \
+  --arch=arm64 \
+  --enable-gpl \
+  --enable-libx264 \
+  --enable-debug=3 \
+  --disable-optimizations \
+  --disable-stripping \
+  --extra-cflags="-fno-omit-frame-pointer -O0 -g -I$PREFIX_X264/include" \
+  --extra-ldflags="-g -L$PREFIX_X264/lib" \
+  --enable-libvmaf \
+  --enable-version3 \
+  --enable-shared
+  
+# here's the configure command for NOT including the x264 snapshot in the build of ffmpeg
+./configure \
+  --prefix="$PREFIX_FFMPEG" \
+  --arch=arm64 \
+  --enable-gpl \
+  --enable-debug=3 \
+  --disable-optimizations \
+  --disable-stripping \
+  --extra-cflags="-fno-omit-frame-pointer -O0 -g" \
+  --extra-ldflags="-g" \
+  --enable-shared
+
+make clean                  # optional
+make -j"$(sysctl -n hw.ncpu)"
+make install
+
+# Use this ffmpeg in your shell:
+export PATH="$PREFIX_FFMPEG/bin:$PATH"
+
+# verification that x264 was linked in as desired:
+ffmpeg -version | sed -n '1,12p'               # look for --enable-libx264
