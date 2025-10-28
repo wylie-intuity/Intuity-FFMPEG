@@ -18,8 +18,11 @@ build libx264
 ***************
 
 cd ${PREFIX_X264}/..
-git clone --depth 1 https://code.videolan.org/videolan/x264.git
+git clone https://code.videolan.org/videolan/x264.git
 cd ${PREFIX_X264}
+
+# there's a single change in the x264 repo evident in April 2025, so checkout the repo at the following commit:
+git checkout 32c3b801191522961102d4bea292cdb61068d0dd 
 
 ./configure --prefix="$PREFIX_X264" --enable-shared --enable-pic
 make -j"$(sysctl -n hw.ncpu)"
