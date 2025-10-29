@@ -85,3 +85,15 @@ export PATH="$PREFIX_FFMPEG/bin:$PATH"
 
 # verification that x264 was linked in as desired:
 ffmpeg -version | sed -n '1,12p'               # look for --enable-libx264
+
+*******************
+Build extract_mvs
+*******************
+
+The ffmpeg project comes with a separate set of utilities in the "doc/examples" directory.
+Build them by typing this command from the top-level ffmpeg directory:
+  make examples
+
+The resulting binary 'extract_mvs' can be executed to dump out a listing of motion vectors, as follows.
+
+./doc/examples/extract_mvs action_current.mp4 | grep -v INTUITY > action_current.mp4_mvs.txt
