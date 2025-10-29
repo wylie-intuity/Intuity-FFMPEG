@@ -1,0 +1,14 @@
+prefix=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG/
+exec_prefix=${prefix}
+libdir=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG//lib
+includedir=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG//include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 59.39.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil 
+Libs.private: -pthread -lm -framework VideoToolbox -framework CoreFoundation -framework CoreMedia -framework CoreVideo -framework CoreServices
+Cflags: -I${includedir}

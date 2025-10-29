@@ -2180,8 +2180,6 @@ decode_intra_mb:
                         uint8_t (* mvd_cache)[2]= &sl->mvd_cache[list][ scan8[index] ];
                         pred_motion(h, sl, index, block_width, list, sl->ref_cache[list][ scan8[index] ], &mx, &my);
                         DECODE_CABAC_MB_MVD(sl, list, index)
-                        printf("[INTUITY] SUB[%d] index=%d list=%d mv=(%d,%d) mvp=(%d,%d) | mv_pixels=(%.2f,%.2f)\n", 
-                        sub_mb_type, index, list, mx, my, mpx, mpy, mx/4.0, my/4.0);
                         ff_tlog(h->avctx, "final mv:%d %d\n", mx, my);
 
                         if(IS_SUB_8X8(sub_mb_type)){
@@ -2247,8 +2245,6 @@ decode_intra_mb:
                     int mx,my,mpx,mpy;
                     pred_motion(h, sl, 0, 4, list, sl->ref_cache[list][ scan8[0] ], &mx, &my);
                     DECODE_CABAC_MB_MVD(sl, list, 0)
-                    printf("[INTUITY] MB_16x16[%d,%d] list=%d mv=(%d,%d) mvd=(%d,%d) | mv_pixels=(%.2f,%.2f)\n", 
-                    sl->mb_x, sl->mb_y, list, mx, my, mpx, mpy, mx/4.0, my/4.0);
                     ff_tlog(h->avctx, "final mv:%d %d\n", mx, my);
 
                     fill_rectangle(sl->mvd_cache[list][ scan8[0] ], 4, 4, 8, pack8to16(mpx,mpy), 2);

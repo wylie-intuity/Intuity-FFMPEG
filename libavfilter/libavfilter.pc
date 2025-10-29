@@ -1,0 +1,14 @@
+prefix=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG/
+exec_prefix=${prefix}
+libdir=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG//lib
+includedir=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG//include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 10.4.100
+Requires: 
+Requires.private: libswscale >= 8.3.100, libpostproc >= 58.3.100, libavformat >= 61.7.100, libavcodec >= 61.19.101, libswresample >= 5.3.100, libavutil >= 59.39.100
+Conflicts:
+Libs: -L${libdir}  -lavfilter 
+Libs.private: -framework OpenGL -framework OpenGL -pthread -lm -L/opt/homebrew/Cellar/libvmaf/3.0.0/lib -lvmaf -framework VideoToolbox -framework CoreImage -framework AppKit -framework CoreFoundation -framework CoreMedia -framework CoreVideo -framework CoreServices
+Cflags: -I${includedir}

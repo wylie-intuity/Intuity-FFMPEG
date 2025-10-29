@@ -274,6 +274,7 @@ static const AVFilter * const filter_list[] = {
     &ff_vf_lagfun,
     &ff_vf_latency,
     &ff_vf_lenscorrection,
+    &ff_vf_libvmaf,
     &ff_vf_limitdiff,
     &ff_vf_limiter,
     &ff_vf_loop,

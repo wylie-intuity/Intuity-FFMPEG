@@ -1,0 +1,14 @@
+prefix=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG/
+exec_prefix=${prefix}
+libdir=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG//lib
+includedir=/Users/gardnermein/Desktop/Intuity/NokiaVParamount/ffmpeg_sandbox/Intuity-FFMPEG//include
+
+Name: libavcodec
+Description: FFmpeg codec library
+Version: 61.19.101
+Requires: 
+Requires.private: libswresample >= 5.3.100, libavutil >= 59.39.100
+Conflicts:
+Libs: -L${libdir}  -lavcodec 
+Libs.private: -liconv -lm -framework AudioToolbox -L/opt/homebrew/Cellar/x264/r3222/lib -lx264 -pthread -lz -framework VideoToolbox -framework CoreFoundation -framework CoreMedia -framework CoreVideo -framework CoreServices
+Cflags: -I${includedir}

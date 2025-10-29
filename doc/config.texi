@@ -541,7 +541,7 @@
 @c @set config-libtwolame no
 @c @set config-libuavs3d no
 @c @set config-libv4l2 no
-@c @set config-libvmaf no
+@set config-libvmaf yes
 @c @set config-libvorbis no
 @c @set config-libvpx no
 @c @set config-libvvenc no
@@ -615,7 +615,7 @@
 @set config-swscale-alpha yes
 @set config-gpl yes
 @c @set config-nonfree no
-@c @set config-version3 no
+@set config-version3 yes
 @set config-avdevice yes
 @set config-avfilter yes
 @set config-swscale yes
@@ -693,7 +693,7 @@
 @set config-frame-thread-encoder yes
 @set config-g722dsp yes
 @set config-golomb yes
-@c @set config-gplv3 no
+@set config-gplv3 yes
 @set config-h263dsp yes
 @set config-h264chroma yes
 @set config-h264dsp yes
@@ -2137,7 +2137,7 @@
 @set config-lenscorrection-filter yes
 @c @set config-lensfun-filter no
 @c @set config-libplacebo-filter no
-@c @set config-libvmaf-filter no
+@set config-libvmaf-filter yes
 @c @set config-libvmaf-cuda-filter no
 @set config-limitdiff-filter yes
 @set config-limiter-filter yes
